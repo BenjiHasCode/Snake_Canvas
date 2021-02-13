@@ -55,14 +55,12 @@ function gameLoop() {
         //update snake position
         updateDirection();
         updatePosition();
+        //check bounds
+        withinBounds(); //REFACTOR TO TELEPORT LOL
         //check fruit collision
         checkEat();
         //check win condition
         won = checkWin();
-        //check alive (bounds, selfeat)
-        if (!withinBounds()) {
-            playing = false;
-        }
         //check if snake has hit itself snakeCollision(x,y, index) - index = the index of the snake we start checking from
         if(snakeCollision(snake.body[0].x, snake.body[0].y, 1)) {
             playing = false;
@@ -77,7 +75,20 @@ function withinBounds() {
     let x = snake.body[0].x;
     let y = snake.body[0].y;
 
-    return (x >= 0 && y >= 0 && x < map.width && y < map.height);
+    //check x
+    if(x < 0) {
+        snake.body[0].x = map.width-1;
+    }else if(x == map.width) {
+        snake.body[0].x = 0;
+    }
+
+    //check y
+    if(y < 0) {
+        snake.body[0].y = map.height-1;
+    }else if(y == map.height) {
+        snake.body[0].y = 0;
+    }
+
 }
 
 //updates snake direction
@@ -232,6 +243,7 @@ function reset(){
     //place fruit
     placeFruit();
     playing = true;
+    won = false;
 }
 
 
