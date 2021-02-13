@@ -56,7 +56,7 @@ function gameLoop() {
         updateDirection();
         updatePosition();
         //check bounds
-        withinBounds(); //REFACTOR TO TELEPORT LOL
+        withinBounds();
         //check fruit collision
         checkEat();
         //check win condition
