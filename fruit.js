@@ -2,7 +2,6 @@ class Fruit{
     constructor() {
         this.x;
         this.y;
-
         this.place();
     }
 
